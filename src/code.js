@@ -11,37 +11,71 @@ function clickButton() {
     const inputNumber = document.getElementById("input-number");
     const numberInput = inputNumber.value;
 
-    if (textInput.length === 0 && dateInput.length === 0 && numberInput.length === 0) {
+    if (textInput.length === 0 || dateInput.length === 0 || numberInput.length === 0) {
         const tableDiv = document.getElementById("table-div");
 
         const fragmentado = document.createDocumentFragment();
 
         const createDiv = document.createElement("div");
 
+        let createId = document.createAttribute("id");
+
+        createId.value = "div-child";
+
+        createDiv.setAttributeNode(createId);
+
         fragmentado.appendChild(createDiv);
 
         tableDiv.appendChild(fragmentado);
 
-        tableDiv.innerHTML="<p> agrega texto </p>";
+        createDiv.innerHTML="<p id=text-id> agrega texto </p>";
     } else {
-        const tableContainer = document.getElementById("table-container");
+        const tableDiv = document.getElementById("table-div");
 
-        const fragmento = document.createDocumentFragment();
+        const divChild = document.getElementById("div-child");
+        
+        if (tableDiv.children.length === 1) {
+            tableDiv.removeChild(divChild);
 
-        let newRow = tableContainer.insertRow(1);
+            const tableContainer = document.getElementById("table-container");
 
-        let newCell = newRow.insertCell(0);
+            let newRow = tableContainer.insertRow(1);
 
-        let newCell2 = newRow.insertCell(1);
+            let newCell = newRow.insertCell(0);
 
-        let newCell3 = newRow.insertCell(2);
+            let newCell2 = newRow.insertCell(1);
 
-        newRow.addEventListener("click", clickFun = (evento) =>{
-            console.log(evento.target.parentNode.remove())
-        })
+            let newCell3 = newRow.insertCell(2);
 
-        newCell.innerHTML = textInput;
-        newCell2.innerHTML = dateInput;
-        newCell3.innerHTML = numberInput;
+            newRow.addEventListener("click", clickFun = (evento) =>{
+                evento.target.parentNode.remove()
+            });
+
+            newCell.innerHTML = textInput;
+            newCell2.innerHTML = dateInput;
+            newCell3.innerHTML = numberInput;     
+        }else{
+            console.log("ok")
+
+            const tableContainer = document.getElementById("table-container");
+
+            let newRow = tableContainer.insertRow(1);
+
+            let newCell = newRow.insertCell(0);
+
+            let newCell2 = newRow.insertCell(1);
+
+            let newCell3 = newRow.insertCell(2);
+
+            newRow.addEventListener("click", clickFun = (evento) =>{
+                console.log(evento.target.parentNode.remove())
+            })
+
+            newCell.innerHTML = textInput;
+            newCell2.innerHTML = dateInput;
+            newCell3.innerHTML = numberInput;
+        }
+
+        
     }
 };
